@@ -3,7 +3,7 @@ main = "worker.js"
 compatibility_date = "2025-02-06"
 
 [vars]
-CORS_ORIGIN = "*"
+CORS_ORIGIN = "http://localhost:5173"
 SHORT_DOMAIN = ""
 
 [[d1_databases]]

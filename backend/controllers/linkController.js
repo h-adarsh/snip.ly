@@ -73,6 +73,10 @@ exports.createLink = async (req, res) => {
       return res.status(400).json({ message: 'Invalid URL format' });
     }
 
+    if (isBlockedHost(normalizedUrl)) {
+      return res.status(400).json({ message: 'URL host is not allowed' });
+    }
+
     // Generate unique shortId with retry logic
     let shortId;
     let attempts = 0;

@@ -16,9 +16,12 @@ const json = (data, status = 200, headers = {}) => {
 }
 
 const withCors = (req, res, env) => {
-  const origin = env.CORS_ORIGIN || '*'
   const headers = new Headers(res.headers)
-  headers.set('Access-Control-Allow-Origin', origin)
+  const requestOrigin = req.headers.get('Origin')
+  if (requestOrigin && requestOrigin === env.CORS_ORIGIN) {
+    headers.set('Access-Control-Allow-Origin', requestOrigin)
+    headers.set('Vary', 'Origin')
+  }
   headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS')
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   headers.set('Access-Control-Max-Age', '86400')
@@ -30,8 +33,10 @@ const handleOptions = (req, env) => {
 }
 
 const getJwtKey = (env) => {
-  const secret = env.JWT_SECRET || ''
-  return new TextEncoder().encode(secret)
+  if (!env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not configured')
+  }
+  return new TextEncoder().encode(env.JWT_SECRET)
 }
 
 const getAuthUser = async (req, env) => {
@@ -251,6 +256,10 @@ const handleCreateLink = async (req, env, userId) => {
     return json({ message: 'Invalid URL format' }, 400)
   }
 
+  if (isBlockedHost(normalizedUrl)) {
+    return json({ message: 'URL host is not allowed' }, 400)
+  }
+
   let shortId = ''
   let attempts = 0
   const maxAttempts = 3
@@ -370,6 +379,10 @@ export default {
     }
 
     try {
+      if (!env.JWT_SECRET || !env.CORS_ORIGIN) {
+        return withCors(req, json({ message: 'Server is not configured' }, 500), env)
+      }
+
       if (req.method === 'POST' && pathname === '/api/auth/register') {
         return withCors(req, await handleRegister(req, env), env)
       }

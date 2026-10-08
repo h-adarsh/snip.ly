@@ -24,16 +24,42 @@ A full-stack URL shortener with authentication, link analytics, dark mode, and l
 - `VITE_SHORT_DOMAIN=https://<your-worker>.workers.dev`
 
 ## Local Development
-**Backend (Express + MongoDB)**
+**Backend (Cloudflare Worker + D1)**
 ```bash
 cd backend
 npm install
-npm run dev
+npm run worker:dev
 ```
+
+Wrangler uses the D1 binding in `backend/wrangler.toml`. Configure the Worker
+secret before testing authentication:
+
+```bash
+npx wrangler secret put JWT_SECRET
+```
+
+The Worker expects the frontend origin in `CORS_ORIGIN`. Use
+`http://localhost:5173` for local development and set the deployed Pages
+origin when deploying.
 
 **Frontend**
 ```bash
 cd frontend
 npm install
+npm run dev
+```
+
+The Vite development server proxies `/api` requests to `http://localhost:3000`.
+To use the local Worker instead, set `VITE_API_BASE` to the URL printed by
+Wrangler, followed by `/api`.
+
+**Legacy Express + MongoDB backend**
+
+The repository also contains an Express/MongoDB implementation for legacy
+deployments. It is not the backend used by the Cloudflare deployment. Set
+`MONGO_URI`, `JWT_SECRET`, and optionally `PORT` and `SHORT_DOMAIN`, then run:
+
+```bash
+cd backend
 npm run dev
 ```
