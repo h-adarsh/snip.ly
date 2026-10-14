@@ -1,0 +1,2 @@
+# Cloudflare Worker Local Dev Secrets
+JWT_SECRET=your_jwt_secret_here

@@ -18,9 +18,15 @@ const json = (data, status = 200, headers = {}) => {
 const withCors = (req, res, env) => {
   const headers = new Headers(res.headers)
   const requestOrigin = req.headers.get('Origin')
-  if (requestOrigin && requestOrigin === env.CORS_ORIGIN) {
-    headers.set('Access-Control-Allow-Origin', requestOrigin)
-    headers.set('Vary', 'Origin')
+  if (requestOrigin) {
+    if (
+      requestOrigin === env.CORS_ORIGIN ||
+      requestOrigin.startsWith('http://localhost:') ||
+      requestOrigin.startsWith('http://127.0.0.1:')
+    ) {
+      headers.set('Access-Control-Allow-Origin', requestOrigin)
+      headers.set('Vary', 'Origin')
+    }
   }
   headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS')
   headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
