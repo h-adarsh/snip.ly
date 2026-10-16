@@ -402,6 +402,10 @@ export default {
           return withCors(req, await handleCreateLink(req, env, null), env)
         }
 
+        if (req.method === 'GET' && pathname === '/api/links/preview') {
+          return withCors(req, await handlePreview(req, env), env)
+        }
+
         const userId = await getAuthUser(req, env)
         if (!userId) {
           return withCors(req, json({ message: 'No token, authorization denied' }, 401), env)
@@ -418,10 +422,6 @@ export default {
         if (req.method === 'DELETE' && pathname.startsWith('/api/links/')) {
           const linkId = pathname.split('/').pop()
           return withCors(req, await handleDeleteLink(env, userId, linkId), env)
-        }
-
-        if (req.method === 'GET' && pathname === '/api/links/preview') {
-          return withCors(req, await handlePreview(req, env), env)
         }
       }
 
