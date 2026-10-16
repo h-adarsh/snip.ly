@@ -20,7 +20,9 @@ const withCors = (req, res, env) => {
   const requestOrigin = req.headers.get('Origin')
   if (requestOrigin) {
     if (
+      env.CORS_ORIGIN === '*' ||
       requestOrigin === env.CORS_ORIGIN ||
+      requestOrigin.endsWith('.pages.dev') ||
       requestOrigin.startsWith('http://localhost:') ||
       requestOrigin.startsWith('http://127.0.0.1:')
     ) {
