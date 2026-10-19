@@ -1,12 +1,11 @@
+import BrandLogo from './BrandLogo';
+
 export default function Navbar({ onLogout, totalLinks = 0, totalClicks = 0, theme = 'light', onToggleTheme }) {
   return (
     <nav className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
       <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-8">
-          <div>
-            <h1 className="text-xl font-bold text-blue-600">Snip.ly</h1>
-            <p className="text-xs text-slate-500 dark:text-slate-400">Snip long links in a snap.</p>
-          </div>
+          <BrandLogo variant="navbar" />
           
           {totalLinks > 0 && (
             <div className="flex gap-4 text-sm">

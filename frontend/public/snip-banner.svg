@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@1,900&amp;display=swap');
+      .title-text {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        font-size: 82px;
+        font-weight: 900;
+        font-style: italic;
+        fill: #FFFFFF;
+      }
+      .sub-text {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        font-size: 21px;
+        font-weight: 800;
+        letter-spacing: 0.22em;
+        fill: #BFDBFE;
+      }
+    </style>
+  </defs>
+
+  <!-- Banner Background -->
+  <rect width="1000" height="250" fill="#2563EB" />
+
+  <!-- Badge Container Group -->
+  <g transform="translate(60, 50)">
+    <!-- Drop Shadow -->
+    <rect x="8" y="10" width="150" height="150" rx="36" fill="#0F172A" />
+    <!-- White Badge Base -->
+    <rect x="0" y="0" width="150" height="150" rx="36" fill="#FFFFFF" stroke="#0F172A" stroke-width="6" />
+    
+    <!-- Scissor Graphic inside Badge -->
+    <g transform="translate(22, 22) scale(1.05)">
+      <circle cx="28" cy="68" r="13" stroke="#2563EB" stroke-width="8.5" fill="none" />
+      <circle cx="28" cy="28" r="13" stroke="#2563EB" stroke-width="8.5" fill="none" />
+      <path d="M37 36 L78 68" stroke="#2563EB" stroke-width="8.5" stroke-linecap="round" />
+      <path d="M37 60 L78 28" stroke="#2563EB" stroke-width="8.5" stroke-linecap="round" />
+      <circle cx="48" cy="48" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="2" />
+    </g>
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(250, 138) skewX(-4)">
+    <text class="title-text" x="0" y="0">SNIP.LY</text>
+  </g>
+  <g transform="translate(250, 180) skewX(-2)">
+    <text class="sub-text" x="0" y="0">SNIP LONG LINKS IN A SNAP</text>
+  </g>
+</svg>

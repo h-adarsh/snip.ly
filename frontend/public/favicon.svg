@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Neo-brutalist Drop Shadow -->
+  <rect x="8" y="8" width="86" height="86" rx="24" fill="#0F172A" />
+  
+  <!-- Badge Base in Snip.ly Blue -->
+  <rect x="3" y="3" width="86" height="86" rx="24" fill="#2563EB" stroke="#0F172A" stroke-width="6" />
+  
+  <!-- Scissor Handles & Blades -->
+  <circle cx="28" cy="68" r="13" stroke="#FFFFFF" stroke-width="8.5" fill="none" />
+  <circle cx="28" cy="28" r="13" stroke="#FFFFFF" stroke-width="8.5" fill="none" />
+  <path d="M37 36 L78 68" stroke="#FFFFFF" stroke-width="8.5" stroke-linecap="round" />
+  <path d="M37 60 L78 28" stroke="#FFFFFF" stroke-width="8.5" stroke-linecap="round" />
+  
+  <!-- Center Pivot Rivet -->
+  <circle cx="48" cy="48" r="4.5" fill="#0F172A" stroke="#FFFFFF" stroke-width="2" />
+</svg>

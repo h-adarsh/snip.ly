@@ -294,7 +294,9 @@ const handleCreateLink = async (req, env, userId) => {
     .bind(id, shortId, normalizedUrl, userId, 0, now, now)
     .run()
 
-  const shortDomain = env.SHORT_DOMAIN || new URL(req.url).origin
+  const reqUrl = new URL(req.url)
+  const isLocal = reqUrl.hostname === 'localhost' || reqUrl.hostname === '127.0.0.1'
+  const shortDomain = isLocal ? reqUrl.origin : (env.SHORT_DOMAIN || reqUrl.origin)
 
   return json({
     id,

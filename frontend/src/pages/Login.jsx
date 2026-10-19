@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
+import BrandLogo from "../components/BrandLogo";
 
 export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -34,10 +35,7 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center px-4 bg-slate-50 dark:bg-slate-900">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600">Snip.ly</h1>
-          <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-            Snip long links in a snap.
-          </p>
+          <BrandLogo variant="auth" />
         </div>
 
         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm p-6">

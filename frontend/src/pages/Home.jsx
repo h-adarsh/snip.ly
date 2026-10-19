@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import LinkShortener from '../components/LinkShortener';
+import BrandLogo from '../components/BrandLogo';
 import api from '../services/api';
 
 export default function Home({ theme = 'light', onToggleTheme }) {
@@ -18,7 +19,9 @@ export default function Home({ theme = 'light', onToggleTheme }) {
     setResult(null);
     try {
       const { data } = await api.post('/links/public', { url });
-      setResult({ shortUrl: data.shortUrl, originalUrl: data.originalUrl });
+      const shortDomain = import.meta.env.VITE_SHORT_DOMAIN;
+      const shortUrl = shortDomain && data.shortId ? `${shortDomain}/${data.shortId}` : data.shortUrl;
+      setResult({ shortUrl, originalUrl: data.originalUrl });
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to create link');
     } finally {
@@ -40,8 +43,10 @@ export default function Home({ theme = 'light', onToggleTheme }) {
               {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
             </button>
           </div>
-          <h1 className="text-4xl font-extrabold text-blue-600">Snip.ly</h1>
-          <p className="text-slate-600 dark:text-slate-400">
+          <div className="my-2">
+            <BrandLogo variant="hero" asLink={false} />
+          </div>
+          <p className="text-slate-600 dark:text-slate-400 max-w-md">
             Shorten any link without logging in. Sign in when you want your dashboard.
           </p>
           <div className="flex items-center gap-3">
